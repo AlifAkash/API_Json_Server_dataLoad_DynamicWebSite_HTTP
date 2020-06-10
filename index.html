@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>JSON</h1>
+    <h2>JavaScript Object Notation</h2>
+
+    <ul id="user-container">
+
+    </ul>
+
+    <input id="title" type="text" placeholder="Title">
+    <br>
+    <input id="bodyContant" type="text" placeholder="Your text">
+    <br>
+    <button id="submit">Submit</button>
+
+    <script>
+        // const user={id:216,name:"masud", friendsAge:[21,22,23],
+        //     friendsName:["kamal","siaam","abrar"],
+        //     lover:{
+        //         name:"josim",
+        //         favFood:"pizza"
+        //     }
+        //     };
+        // const userJson=JSON.stringify(user);
+        // console.log(userJson);
+        // const userFromJson=JSON.parse(userJson);
+        // console.log(userFromJson);
+
+
+        
+        // fetch('https://jsonplaceholder.typicode.com/users')
+        // .then(response => response.json())
+        // .then(json => displayUser(json));
+
+        // function displayUser(users){
+
+        //     const userNames=users.map(user=>user.username);
+        //     console.log(userNames);
+
+        //     const ul=document.getElementById("user-container");
+
+        //     for (let i = 0; i < users.length; i++) {
+        //         const username = userNames[i];
+        //         const li=document.createElement("li");   
+        //         li.innerText=username;
+        //         ul.appendChild(li);            
+        //     }
+        // }
+
+        document.getElementById("submit").addEventListener("click", function(){
+            const title=document.getElementById("title").value;
+            const bodyContant=document.getElementById("bodyContant").value;
+            const post={title: title, body: bodyContant};
+            postToServer(post);
+        })
+
+        function postToServer(postInfo){
+            fetch('https://jsonplaceholder.typicode.com/posts', {
+                method: 'POST',
+                body: JSON.stringify(postInfo),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+            .then(response => response.json())
+            .then(data => console.log(data));
+        }
+
+    </script>
+    
+</body>
+</html>
